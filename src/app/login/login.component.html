@@ -88,6 +88,11 @@
               formControlName="password"
             />
           </div>
+
+          <div *ngIf="loginError" class="text-danger mb-3">
+            Invalid credentials. Please check your email and password.
+          </div>
+
           <div class="input-group mb-5 d-flex justify-content-between">
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="formCheck" />

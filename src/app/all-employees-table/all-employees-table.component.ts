@@ -24,7 +24,7 @@ export class AllEmployeesTableComponent implements OnInit {
   }
 
   fetchEmployees(): void {
-    this.http.get<any[]>('http://localhost:8080/users').subscribe(
+    this.http.get<any[]>('http://localhost:8080/users/employees').subscribe(
       (response) => {
         this.employees = response;
       },

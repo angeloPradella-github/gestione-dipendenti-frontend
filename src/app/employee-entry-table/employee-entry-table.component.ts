@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SingleEmployeeLogService } from '../single-employee-log.service';
+import { LogUpdateService } from '../log-update.service';
 
 @Component({
   selector: 'app-employee-entry-table',
@@ -13,10 +14,13 @@ export class EmployeeEntryTableComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private employeeLogService: SingleEmployeeLogService
+    private employeeLogService: SingleEmployeeLogService,
+    private logUpdateService: LogUpdateService
   ) {}
 
   ngOnInit(): void {
+    this.subscribeToLogUpdates();
+
     this.route.url.subscribe((segments) => {
       const idSegment = segments[segments.length - 1];
       if (idSegment) {
@@ -30,6 +34,24 @@ export class EmployeeEntryTableComponent implements OnInit {
         }
       }
     });
+  }
+
+  subscribeToLogUpdates() {
+    this.logUpdateService.logUpdate$.subscribe((update) => {
+      if (update) {
+        this.loadUserEntries();
+      }
+    });
+  }
+
+  loadUserEntries() {
+    if (this.userId) {
+      this.employeeLogService
+        .getUserEntries(this.userId)
+        .subscribe((entries) => {
+          this.userEntries = this.sortEntries(entries);
+        });
+    }
   }
 
   calculateWorkingHours(entryTime: string, exitTime: string | null): string {
