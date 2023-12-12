@@ -14,6 +14,7 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { EmpoyeeInfoComponent } from './empoyee-info/empoyee-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminViewsEmployeeLogComponent } from './admin-views-employee-log/admin-views-employee-log.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddEmployeeComponent,
     EditEmployeeComponent,
     EmpoyeeInfoComponent,
+    AdminViewsEmployeeLogComponent,
   ],
   imports: [
     BrowserModule,

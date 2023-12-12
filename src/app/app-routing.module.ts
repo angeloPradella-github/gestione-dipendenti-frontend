@@ -8,6 +8,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { AllEmployeesTableComponent } from './all-employees-table/all-employees-table.component';
 import { AuthGuard } from './auth.guard';
+import { AdminViewsEmployeeLogComponent } from './admin-views-employee-log/admin-views-employee-log.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'all-employees',
     component: AllEmployeesTableComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-views-employee-log',
+    component: AdminViewsEmployeeLogComponent,
     canActivate: [AuthGuard],
   },
 ];
