@@ -24,7 +24,8 @@
             </button>
           </a>
 
-          <button type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#edit">
+          <button type="button" class="btn btn-warning me-1" (click)="getUserSingle(employee.id)" data-bs-toggle="modal"
+            data-bs-target="#edit">
             <i class="fa-solid fa-pen-to-square"></i> Edit
           </button>
           <button type="button" class="btn btn-danger ml-5" (click)="deleteEmployee(employee.id)">
