@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-employee',
@@ -8,11 +9,29 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddEmployeeComponent implements OnInit{
 
-  onSubmitReactive(){
-    console.log(this.aggiungiUtenteForm.value)
-    this.aggiungiUtenteForm.reset()
-    this.showResponseResult = "utente creato correttamente"
+  constructor(private httpClient: HttpClient) { }
 
+  isSuccess(): boolean {
+    // Controlla se il messaggio di risposta indica un successo
+    return this.showResponseResult.toLowerCase().includes('correttamente');
+  }
+  
+
+  onSubmitReactive(){
+
+    const formData = this.aggiungiUtenteForm.value;
+
+    this.httpClient.post('http://localhost:8080/users/new', formData).subscribe(
+      (response) => {
+        console.log('Risposta dal server:', response);
+        this.aggiungiUtenteForm.reset();
+        this.showResponseResult = 'Utente creato correttamente';
+      },
+      (error) => {
+        console.error('Errore durante la chiamata API:', error);
+        this.showResponseResult = 'Errore durante il salvataggio dell\'utente';
+      }
+    );
   }
   
   aggiungiUtenteForm!: FormGroup;
@@ -21,11 +40,11 @@ export class AddEmployeeComponent implements OnInit{
   
   ngOnInit(): void {
     this.aggiungiUtenteForm = new FormGroup({
-      nome: new FormControl(null, Validators.required),
-      cognome: new FormControl(null, Validators.required),
+      name: new FormControl(null, Validators.required),
+      surname: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      ruolo: new FormControl(null, [Validators.required]),
+      role: new FormControl(null, [Validators.required]),
     });
   }
 
