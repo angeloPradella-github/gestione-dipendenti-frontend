@@ -61,7 +61,7 @@
                         <select class="form-control" id="role" name="role" formControlName="role">
                             <option value="" disabled selected>Insert role</option>
                             <option value="admin">Admin</option>
-                            <option value="utente">Utente</option>
+                            <option value="employee">Employee</option>
                         </select>
                         <p *ngIf="!aggiungiUtenteForm.get('role')?.valid && aggiungiUtenteForm.get('role')?.touched"
                             class="text-danger">Role is invalid</p>
