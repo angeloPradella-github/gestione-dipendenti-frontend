@@ -5,21 +5,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TimeEmployeeService {
-  private baseUrl = 'https://api.example.com'; // Imposta la tua URL API
+  private baseUrl = 'http://localhost:8080'; 
 
   constructor(private http: HttpClient) { }
 
-  saveEntryTime(): Observable<any> {
-    // Esegui la chiamata API per salvare l'ora di entrata
-    const entryTimeData = {}; // Inserisci i dati necessari per l'ora di entrata
+  saveEntryTime(userId: number): Observable<any> {
 
-    return this.http.post(`${this.baseUrl}/entry-time`, entryTimeData);
+    const entryTimeData = {
+      entry_time: new Date().toISOString(), 
+      idUtente: userId 
+    };
+
+    return this.http.post(`${this.baseUrl}/logs/new/${userId}`, entryTimeData);
   }
 
-  saveExitTime(): Observable<any> {
-    // Esegui la chiamata API per salvare l'ora di uscita
-    const exitTimeData = {}; // Inserisci i dati necessari per l'ora di uscita
-
-    return this.http.post(`${this.baseUrl}/exit-time`, exitTimeData);
+  saveExitTime(logId: number, exitTimeData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/log/update/${logId}`, exitTimeData);
   }
+  
+  
 }
