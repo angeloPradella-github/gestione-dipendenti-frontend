@@ -1,1 +1,28 @@
-<p>admin-views-employee-log works!</p>
+<div class="container mt-5">
+    <h2>Page of {{datiUtente?.name}}</h2>
+    <div class="col-md-6">
+        <!-- Card Info -->
+        <div class="card custom-card">
+          <div class="card-body m-3">
+            <h5 class="card-title">User Information</h5>
+            <ul class="mt-5">
+                <li class="list-group-item listData">
+                    <strong>Id:</strong> {{ datiUtente?.id }}
+                  </li>
+              <li class="list-group-item listData">
+                <strong>Name:</strong> {{ datiUtente?.name }}
+              </li>
+              <li class="list-group-item listData">
+                <strong>Surname:</strong> {{ datiUtente?.surname }}
+              </li>
+              <li class="list-group-item listData">
+                <strong>Email:</strong> {{ datiUtente?.email }}
+              </li>
+              <li class="list-group-item listData">
+                <strong>Role:</strong> {{ datiUtente?.role }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</div>
