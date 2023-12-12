@@ -14,6 +14,15 @@ export class AddEmployeeComponent implements OnInit{
 
   onSubmitReactive(){
     console.log(this.aggiungiUtenteForm.value)
+    this.aggiungiUtenteForm = new FormGroup({
+      nome: new FormControl(''),
+      cognome: new FormControl(''),
+      password: new FormControl(''),
+      email: new FormControl(''),
+      ruolo: new FormControl(''),
+
+      
+    });
   }
   
   aggiungiUtenteForm!: FormGroup;
