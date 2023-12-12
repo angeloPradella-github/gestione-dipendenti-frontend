@@ -34,21 +34,15 @@ export class LoginComponent {
       const password = this.formReattivo.get('password')?.value;
 
       this.loginService.login(email, password).subscribe(
-        (response: any) => {
-          console.log('Risposta dal backend:', response);
-
-          if (response && response.success) {
-            const utente = response.utente;
-            console.log('Utente loggato:', utente);
-            this.globalVariablesService.updateUtenteLoggato(utente);
-            this.formReattivo.reset();
-            if (utente.isAdmin) {
-              this.router.navigate(['/admin']);
-            } else {
-              this.router.navigate(['/user']);
-            }
+        (user) => {
+          console.log('Utente loggato:', user);
+          localStorage.setItem('utenteLoggato', JSON.stringify(user));
+          this.globalVariablesService.updateUtenteLoggato(user);
+          this.formReattivo.reset();
+          if (user.isAdmin) {
+            this.router.navigate(['/admin']);
           } else {
-            console.log('Credenziali non valide');
+            this.router.navigate([`/employee-records-view/${user.id}`]);
           }
         },
         (error: any) => {

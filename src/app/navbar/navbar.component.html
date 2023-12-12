@@ -18,7 +18,7 @@
           >Login</a
         >
         <a class="show-name" *ngIf="isLogged" (click)="showLogout = !showLogout"
-          >Ciao, <b>{{ utenteLoggato?.nome }}</b>
+          >Ciao, <b>{{ utenteLoggato?.name }}</b>
         </a>
         <a *ngIf="showLogout" class="logout-button" (click)="logout()"
           >Logout</a

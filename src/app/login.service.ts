@@ -22,7 +22,7 @@ export class LoginService {
       ruolo: 'admin',
     },
   ];
-  private apiUrl = 'URL';
+  private apiUrl = 'http://localhost:8080/login';
 
   constructor(private http: HttpClient) {}
 
