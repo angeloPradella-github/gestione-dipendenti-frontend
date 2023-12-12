@@ -5,45 +5,63 @@ import { EditEmployeeService } from '../edit-employee.service';
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.css']
+  styleUrls: ['./edit-employee.component.css'],
 })
 export class EditEmployeeComponent implements OnInit {
   // Iniezione del servizio API nel costruttore del componente
-  constructor(private EditEmployeeService: EditEmployeeService) { }
+  constructor(private EditEmployeeService: EditEmployeeService) {}
 
-  onSubmit(form:any){
-    console.log(form)
+  editName1 = '';
+  onSubmit(form: any) {
+    console.log(form);
   }
 
-  onSubmitReactive(){
-    if (this.editEmployeeForm.valid) { //verifico se il form è valido
-      console.log(this.editEmployeeForm.value);
-      // Gestione dei dati o chiamata a un servizio per inviare i dati
-      // Invia i dati al servizio API per l'aggiornamento nel database
-      this.EditEmployeeService.updateEmployeeData(this.editEmployeeForm.value).subscribe(
-        (response: any) => {
-          console.log('Dati aggiornati con successo nel database:', response);
-          this.editEmployeeForm.reset(); // Resetta il form dopo l'invio dei dati
-        },
-        (error: any) => {
-          console.error('Si è verificato un errore durante l\'aggiornamento dei dati:', error);
-          // Gestire l'errore come necessario
-        }
-      );
-    } else {
-      console.log('Il form non è valido.');
-    }
+  onSubmitReactive() {
+    const updatedEmployee = {
+      name: this.editEmployeeForm.get('editName')?.value,
+      surname: this.editEmployeeForm.get('editSurname')?.value,
+      password: this.editEmployeeForm.get('editPassword')?.value,
+      id: this.EditEmployeeService.id,
+    };
+
+    // Chiamata per l'aggiornamento dell'utente nel servizio
+    // this.EditEmployeeService.fetchEmployeeById(
+    //   this.EditEmployeeService.employee.name.id
+    // );
+    this.EditEmployeeService.updateEmployeeData(updatedEmployee).subscribe(
+      (user: any) => {
+        console.log(user);
+      },
+      (error) => {
+        console.error(`Si è verificato un errore:`, error);
+      }
+    );
+
+    // Esegui qui la chiamata HTTP per aggiornare l'utente con i nuovi valori
+
+    // Aggiorna anche il servizio locale con il nuovo utente
+    // this.EditEmployeeService.employee = updatedEmployee;
   }
-  
+
   editEmployeeForm!: FormGroup;
-  
+
   datiUtente: any;
 
+  utenteId = this.EditEmployeeService.id;
+
   ngOnInit(): void {
-    this.editEmployeeForm = new FormGroup({
-      editName: new FormControl(null, Validators.required),
-      editSurname: new FormControl(null, Validators.required),
-      editPassword: new FormControl(null, Validators.required),
+    this.EditEmployeeService.fetchEmployeeById(this.EditEmployeeService.id);
+
+    this.EditEmployeeService.employee$.subscribe((employee) => {
+      if (employee) {
+        console.log(employee.name);
+        // this.editName1 = employee.name;
+        this.editEmployeeForm = new FormGroup({
+          editName: new FormControl(employee.name),
+          editSurname: new FormControl(employee.surname),
+          editPassword: new FormControl(employee.password),
+        });
+      }
     });
 
     const userData = localStorage.getItem('utenteLoggato');

@@ -8,18 +8,32 @@
             <div class="modal-body">
                 <form [formGroup]="editEmployeeForm" (ngSubmit)="onSubmitReactive()">
 
-                    <div class="form-group mb-3">
-                        <label for="editName">Edit name:</label>
+                    <!--   ////////////////////////////////////////////////////////////////////////////////// -->
+                    <div class="form-group mb-3" hidden>
+                        <label for="editName">Edit Name:</label>
                         <input class="form-control" type="text" id="editName" name="editName"
-                            placeholder="{{datiUtente.nome}}" formControlName="editName">
+                            formControlName="editName">
                         <p *ngIf="!editEmployeeForm.get('editName')?.valid && editEmployeeForm.get('editName')?.touched"
-                            class="text-danger">Invalid Name</p>
+                            class="text-danger">Invalid Surname</p>
+                    </div>
+                    <!--   ////////////////////////////////////////////////////////////////////////////////// -->
+
+                    <div>
+                        {{utenteId}}a
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="editName">Edit Name:</label>
+                        <input class="form-control" type="text" id="editName" name="editName"
+                            formControlName="editName">
+                        <p *ngIf="!editEmployeeForm.get('editName')?.valid && editEmployeeForm.get('editName')?.touched"
+                            class="text-danger">Invalid Surname</p>
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="editSurname">Edit surname:</label>
                         <input class="form-control" type="text" id="editSurname" name="editSurname"
-                        placeholder="{{datiUtente.cognome}}" formControlName="editSurname">
+                            formControlName="editSurname">
                         <p *ngIf="!editEmployeeForm.get('editSurname')?.valid && editEmployeeForm.get('editSurname')?.touched"
                             class="text-danger">Invalid Surname</p>
                     </div>
@@ -27,7 +41,7 @@
                     <div class="form-group mb-3">
                         <label for="editPassword">Edit password:</label>
                         <input class="form-control" type="password" id="editPassword" name="editPassword"
-                        placeholder="{{datiUtente.password}}" formControlName="editPassword">
+                            formControlName="editPassword">
                         <p *ngIf="!editEmployeeForm.get('editPassword')?.valid && editEmployeeForm.get('editPassword')?.touched"
                             class="text-danger">Invalid Password</p>
                     </div>

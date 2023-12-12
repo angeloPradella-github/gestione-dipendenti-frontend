@@ -1,12 +1,17 @@
-header {
-  background: #fff;
-  width: 100%;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
-}
+
+  header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    z-index: 1000; /* Assicura che la navbar sia davanti ad altri elementi */
+  }
+
 header .logo {
   font-size: 30px;
   text-transform: uppercase;
