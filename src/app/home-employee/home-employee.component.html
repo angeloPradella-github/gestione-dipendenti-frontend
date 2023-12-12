@@ -7,14 +7,14 @@
 
         <!-- Visualizzazione dell'orologio -->
         <div class=" mt-3">
-          <p>Current time: {{ currentTime | date: 'mediumTime' }}</p>
+          <p><b>Current time:</b> {{ currentTime | date: 'mediumTime' }}</p>
         </div>
         <!-- Utilizzo di *ngIf per mostrare il pulsante corretto -->
-        <button *ngIf="isEntered; else enterButton" class="btn btn-danger" (click)="exit()">
+        <button *ngIf="isEntered; else enterButton" class="button-67" (click)="exit()">
           Exit
         </button>
         <ng-template #enterButton>
-          <button class="btn btn-success" (click)="enter()">
+          <button class="button-68" (click)="enter()">
             Enter
           </button>
         </ng-template>
