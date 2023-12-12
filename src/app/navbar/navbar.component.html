@@ -1,1 +1,34 @@
-<p>navbar works!</p>
+<header>
+  <div class="logo">STAFF MONITOR</div>
+  <input type="checkbox" id="nav_check" hidden />
+  <nav>
+    <ul>
+      <li>
+        <a href="" class="active">Home</a>
+      </li>
+      <li>
+        <a>Scheda Personale</a>
+      </li>
+      <li>
+        <a href="">Apri Ticket</a>
+      </li>
+
+      <li class="logout-container">
+        <a *ngIf="!isLogged" [routerLink]="['/login']" class="login-button"
+          >Login</a
+        >
+        <a class="show-name" *ngIf="isLogged" (click)="showLogout = !showLogout"
+          >Ciao, <b>{{ utenteLoggato?.nome }}</b>
+        </a>
+        <a *ngIf="showLogout" class="logout-button" (click)="logout()"
+          >Logout</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <label for="nav_check" class="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </label>
+</header>

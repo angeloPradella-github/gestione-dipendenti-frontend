@@ -7,15 +7,32 @@ import { HomeEmployeeComponent } from './home-employee/home-employee.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { AllEmployeesTableComponent } from './all-employees-table/all-employees-table.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeEmployeeComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'employee-records-view/:id', component: EmployeeEntryTableComponent },
-  { path: 'admin', component: HomeAdminComponent },
-  { path: 'add-employee', component: AddEmployeeComponent },
-  { path: 'edit-employee', component: EditEmployeeComponent },
-  { path: 'all-employees', component: AllEmployeesTableComponent },
+  {
+    path: 'employee-records-view/:id',
+    component: EmployeeEntryTableComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'admin', component: HomeAdminComponent, canActivate: [AuthGuard] },
+  {
+    path: 'add-employee',
+    component: AddEmployeeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'edit-employee',
+    component: EditEmployeeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'all-employees',
+    component: AllEmployeesTableComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

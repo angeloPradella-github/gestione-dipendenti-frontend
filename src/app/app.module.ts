@@ -12,6 +12,8 @@ import { AllEmployeesTableComponent } from './all-employees-table/all-employees-
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { EmpoyeeInfoComponent } from './empoyee-info/empoyee-info.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,12 @@ import { EmpoyeeInfoComponent } from './empoyee-info/empoyee-info.component';
     EditEmployeeComponent,
     EmpoyeeInfoComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

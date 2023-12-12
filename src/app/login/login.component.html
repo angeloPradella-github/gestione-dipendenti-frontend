@@ -1,1 +1,127 @@
-<p>login works!</p>
+<section>
+  <!----------------------- Main Container -------------------------->
+  <div
+    class="container d-flex justify-content-center align-items-center min-vh-100"
+  >
+    <!----------------------- Login Container -------------------------->
+    <div class="row border rounded-5 p-3 bg-white shadow box-area">
+      <!--------------------------- Left Box ----------------------------->
+      <div
+        class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
+        style="background: #23356c"
+      >
+        <div class="featured-image mb-3">
+          <img
+            src="assets/images/1.png"
+            class="img-fluid"
+            style="width: 250px"
+          />
+        </div>
+        <p
+          class="text-white fs-2"
+          style="
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+          "
+        >
+          Be Verified
+        </p>
+        <small
+          class="text-white text-wrap text-center"
+          style="width: 17rem; font-family: 'Courier New', Courier, monospace"
+          >Find everything about your Tickets</small
+        >
+      </div>
+      <!-------------------- ------ Right Box ---------------------------->
+
+      <div class="col-md-6 right-box">
+        <form
+          [formGroup]="formReattivo"
+          (ngSubmit)="onMockedLogin()"
+          class="row align-items-center"
+        >
+          <div class="header-text mb-4">
+            <h2>Hello, Again</h2>
+            <p>We are happy to have you back.</p>
+          </div>
+          <article
+            *ngIf="
+              formReattivo.get('email')?.invalid &&
+              formReattivo.get('email')?.touched
+            "
+            class="text-danger"
+          >
+            <div *ngIf="formReattivo.get('email')?.errors?.['required']">
+              Email is required
+            </div>
+            <div *ngIf="formReattivo.get('email')?.errors?.['email']">
+              Please enter a valid email
+            </div>
+          </article>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Email address"
+              formControlName="email"
+            />
+          </div>
+          <article
+            *ngIf="
+              formReattivo.get('password')?.invalid &&
+              formReattivo.get('password')?.touched
+            "
+            class="text-danger"
+          >
+            <div *ngIf="formReattivo.get('password')?.errors?.['required']">
+              Password is required
+            </div>
+            <div *ngIf="formReattivo.get('password')?.errors?.['minlength']">
+              Password must be at least 5 characters
+            </div>
+          </article>
+          <div class="input-group mb-1">
+            <input
+              type="password"
+              class="form-control form-control-lg bg-light fs-6"
+              placeholder="Password"
+              formControlName="password"
+            />
+          </div>
+          <div class="input-group mb-5 d-flex justify-content-between">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="formCheck" />
+              <label for="formCheck" class="form-check-label text-secondary"
+                ><small>Remember Me</small></label
+              >
+            </div>
+            <div class="forgot">
+              <small><a href="#">Forgot Password?</a></small>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <button
+              class="btn btn-lg btn-primary w-100 fs-6"
+              [disabled]="!formReattivo.valid"
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
+          <div class="input-group mb-3">
+            <button class="btn btn-lg btn-light w-100 fs-6">
+              <img
+                src="assets/images/google.png"
+                style="width: 20px"
+                class="me-2"
+              /><small>Sign In with Google</small>
+            </button>
+          </div>
+          <!-- <div class="row">
+            <small>Don't have account? <a href="#">Sign Up</a></small>
+          </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
