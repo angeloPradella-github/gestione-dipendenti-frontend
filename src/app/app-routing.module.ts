@@ -33,6 +33,11 @@ const routes: Routes = [
     component: AllEmployeesTableComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'home-employee/:id',
+    component: HomeEmployeeComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
