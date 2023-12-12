@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -86,8 +86,21 @@ export class SingleEmployeeLogService {
 
   getUserEntries(userId: number): Observable<any[]> {
     console.log(userId);
-    return this.http.get<any[]>(`${this.apiUrl}/${userId}`);
+    return this.http
+      .get<any[]>(`${this.apiUrl}/${userId}`)
+      .pipe(
+        map((entries) => entries.map((entry) => this.normalizeEntryData(entry)))
+      );
 
     //return of(this.mockUserData);
+  }
+  private normalizeEntryData(entry: any) {
+    //perche i frontend ha le chiavi con nomi diversi da quello che avevo mockato io
+    return {
+      id: entry.id,
+      entry_time: entry.entryTime,
+      exit_time: entry.exitTime,
+      user_id: entry.userId,
+    };
   }
 }
