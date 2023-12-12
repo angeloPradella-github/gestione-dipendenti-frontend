@@ -1,0 +1,36 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .custom-card {
+    height: 300px; /* Altezza desiderata per le card */
+    margin-bottom: 20px;
+    border-radius: 15px; /* Bordi arrotondati */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra */
+  }
+
+  /* Stile per il pulsante Entra */
+  .bottom-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  /* Stile per le card più strette */
+.custom-narrow-card {
+    width: 80%; /* Imposta la larghezza desiderata */
+  }
+  
+.listData{
+    margin-bottom: 10px;
+}

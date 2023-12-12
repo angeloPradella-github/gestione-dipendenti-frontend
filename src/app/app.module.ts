@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { AdminViewsEmployeeLogComponent } from './admin-views-employee-log/admin-views-employee-log.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatTableModule } from '@angular/material/table';
     AddEmployeeComponent,
     EditEmployeeComponent,
     EmpoyeeInfoComponent,
+    AdminViewsEmployeeLogComponent,
   ],
   imports: [
     BrowserModule,
