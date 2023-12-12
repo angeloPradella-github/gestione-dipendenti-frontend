@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { EditEmployeeService } from '../edit-employee.service';
 
 @Component({
   selector: 'app-all-employees-table',
@@ -9,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 export class AllEmployeesTableComponent implements OnInit {
   employees: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private editService: EditEmployeeService
+  ) {}
 
   ngOnInit(): void {
     this.fetchEmployees();
+  }
+
+  getUserSingle(employeeId: number): void {
+    this.editService.fetchEmployeeById(employeeId);
   }
 
   fetchEmployees(): void {
