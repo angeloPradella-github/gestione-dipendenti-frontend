@@ -35,7 +35,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'admin-views-employee-log',
+    path: 'admin-views-employee-log/:id',
     component: AdminViewsEmployeeLogComponent,
     canActivate: [AuthGuard],
   },

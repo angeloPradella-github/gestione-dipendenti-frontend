@@ -11,68 +11,87 @@ export class HomeEmployeeComponent implements OnInit {
   
   public currentTime: Date = new Date();
   public isEntered: boolean = false;
+  idUtente: number | undefined;
+  datiUtente: any;
+  logId: number | undefined;
+  
+  constructor(private timeEmployeeService: TimeEmployeeService) { }
 
-  constructor(private TimeEmployeeService: TimeEmployeeService) { }
+  ngOnInit(): void {
+
+    const userData = localStorage.getItem('utenteLoggato');
+
+    if (userData) {
+
+      this.datiUtente = JSON.parse(userData);
+      this.idUtente = this.datiUtente.id; 
+    } else {
+      console.log('Nessun dato utente trovato nella Local Storage');
+    }
+  }
 
   enter() {
     console.log('Entra');
     this.isEntered = true;
-    this.saveEntryTime(); // Chiama il metodo per salvare l'ora di entrata
-  }
+  
 
-  exit() {
-    console.log('Esci');
-    this.isEntered = false;
-    this.saveExitTime(); // Chiama il metodo per salvare l'ora di uscita
-  }
+    if (this.idUtente) {
+      this.saveEntryTime(this.idUtente);
+    } else {
+      console.error('ID utente non definito');
 
-  // Metodo per salvare l'ora di entrata tramite chiamata API
-  saveEntryTime() {
-    // Esegui la chiamata API per salvare l'ora di entrata
-    // Utilizza il servizio ApiService per eseguire la chiamata
-    this.TimeEmployeeService.saveEntryTime().subscribe(
-      (response:any) => {
-        // Gestisci la risposta se necessario
-        console.log('Ora di entrata salvata nel database');
+    }
+  }
+  
+  saveEntryTime(userId: number) {
+    this.timeEmployeeService.saveEntryTime(userId).subscribe(
+      (response: any) => {
+        this.logId = response.id; 
+        console.log('Ora di entrata salvata nel database con ID del log:', this.logId);
       },
-      (error:any) => {
-        // Gestisci l'errore se la chiamata fallisce
+      (error: any) => {
         console.error('Errore durante il salvataggio dell\'ora di entrata:', error);
       }
     );
   }
 
-  // Metodo per salvare l'ora di uscita tramite chiamata API
-  saveExitTime() {
-    // Esegui la chiamata API per salvare l'ora di uscita
-    // Utilizza il servizio ApiService per eseguire la chiamata
-    this.TimeEmployeeService.saveExitTime().subscribe(
-      (response:any) => {
-        // Gestisci la risposta se necessario
-        console.log('Ora di uscita salvata nel database');
+  exit() {
+    console.log('Esce');
+    this.isEntered = false;
+  
+    if (this.logId) {
+      const exitTime = this.getFormattedDateTime(new Date());
+      console.log('Data di uscita formattata:', exitTime);
+  
+      const exitTimeData = {
+        exitTime: this.getFormattedDateTime(new Date())
+      };
+      this.saveExitTime(this.logId, exitTimeData);
+    } else {
+      console.error('ID del log non definito');
+    }
+  }
+  
+  saveExitTime(logId: number, exitTimeData: any) {
+    this.timeEmployeeService.saveExitTime(logId, exitTimeData).subscribe(
+      (response: any) => {
+        console.log('Ora di uscita salvata nel database per il log con ID:', logId);
       },
-      (error:any) => {
-        // Gestisci l'errore se la chiamata fallisce
-        console.error('Errore durante il salvataggio dell\'ora di uscita:', error);
+      (error: any) => {
+        console.error('Errore durante il salvataggio dellora di uscita:', error);
       }
     );
   }
+
+  getFormattedDateTime(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
   
-  datiUtente: any;
-
-  ngOnInit(): void {
-    // Aggiorna l'orologio ogni secondo
-    setInterval(() => {
-      this.updateTime();
-    }, 1000);
-
-    const userData = localStorage.getItem('utenteLoggato');
-    if (userData) {
-      // Converte la stringa JSON in un oggetto JavaScript
-      this.datiUtente = JSON.parse(userData);
-    } else {
-      console.log('Nessun dato utente trovato nella Local Storage');
-    }
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
   updateTime() {
