@@ -10,6 +10,8 @@ import { GlobalVariablesService } from '../global-variables.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  loginError: boolean = false;
+
   constructor(
     private loginService: LoginService,
     private globalVariablesService: GlobalVariablesService,
@@ -47,6 +49,7 @@ export class LoginComponent {
         },
         (error: any) => {
           console.error('Errore durante la chiamata:', error);
+          this.loginError = true;
         }
       );
     } else {
@@ -72,6 +75,7 @@ export class LoginComponent {
         }
       } else {
         console.log('Credenziali non valide ');
+        this.loginError = true;
       }
     } else {
       console.log('Form non valido');
