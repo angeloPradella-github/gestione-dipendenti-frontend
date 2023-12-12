@@ -14,6 +14,8 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { EmpoyeeInfoComponent } from './empoyee-info/empoyee-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
 import { AdminViewsEmployeeLogComponent } from './admin-views-employee-log/admin-views-employee-log.component';
 
 @NgModule({
@@ -35,6 +37,8 @@ import { AdminViewsEmployeeLogComponent } from './admin-views-employee-log/admin
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -18,17 +18,16 @@
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.surname }}</td>
                 <td>
-                    <a [routerLink]="['/admin-views-employee-log', employee.id ]">
+                    <a [routerLink]="['/admin-views-employee-log']">
                         <button type="button" class="btn btn-primary me-1">
-                            <i class="fa-solid fa-eye"></i> Show
+                            <i class="fa-solid fa-eye"></i>
                         </button>
                     </a>
-
                     <button type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#edit">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button type="button" class="btn btn-danger ml-5" (click)="deleteEmployee(employee.id)">
-                        <i class="fa-solid fa-trash"></i> Delete
+                        <i class="fa-solid fa-trash"></i>
                     </button>
                 </td>
             </tr>
@@ -40,6 +39,5 @@
 </div>
 
 <app-add-employee></app-add-employee>
-
 
 <app-edit-employee></app-edit-employee>
