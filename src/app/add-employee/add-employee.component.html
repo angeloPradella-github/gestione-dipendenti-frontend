@@ -1,9 +1,12 @@
 <p>add-employee works!</p>
+
+<!--
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Aggiungi Nuovo Ticket</h5>
+                <div *ngIf="showResponseResult">{{showResponseResult}}</div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -52,13 +55,76 @@
                             class="text-danger">Ruolo non valido</p>
                     </div>
 
-                    <button data-bs-dismiss="modal" class="btn btn-primary" type="submit"
-                        [disabled]="!aggiungiUtenteForm.valid">Invia</button>
+                    <button class="btn btn-primary" type="submit" [disabled]="!aggiungiUtenteForm.valid">Invia</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
 
                 </form>
 
 
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aggiungi Nuovo Utente</h5>
+                <!-- Visualizza l'avviso solo se showResponseResult è definito -->
+                <div *ngIf="showResponseResult" class="custom-alert alert alert-success">{{ showResponseResult }}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="aggiungiUtenteForm" (ngSubmit)="onSubmitReactive()">
+
+                    <div class="form-group mb-3">
+                        <label for="fname">Nome:</label>
+                        <input class="form-control" type="text" id="fname1" name="fname1"
+                            placeholder="Inserisci il nome" formControlName="nome">
+                        <p *ngIf="!aggiungiUtenteForm.get('nome')?.valid && aggiungiUtenteForm.get('nome')?.touched"
+                            class="text-danger">Nome non valido</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="lname">Cognome:</label>
+                        <input class="form-control" type="text" id="lname1" name="lname1"
+                            placeholder="Inserisci il cognome" formControlName="cognome">
+                        <p *ngIf="!aggiungiUtenteForm.get('cognome')?.valid && aggiungiUtenteForm.get('cognome')?.touched"
+                            class="text-danger">Cognome non valido</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="pname">Password:</label>
+                        <input class="form-control" type="password" id="pname1" name="pname1"
+                            placeholder="Inserisci la password" formControlName="password">
+                        <p *ngIf="!aggiungiUtenteForm.get('password')?.valid && aggiungiUtenteForm.get('password')?.touched"
+                            class="text-danger">Password non valida</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="femail">Email:</label>
+                        <input class="form-control" type="text" id="femail1" name="femail1"
+                            placeholder="Inserisci l'email" formControlName="email">
+                        <p *ngIf="!aggiungiUtenteForm.get('email')?.valid && aggiungiUtenteForm.get('email')?.touched"
+                            class="text-danger">Email non valida</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ruolo">Ruolo:</label>
+                        <select class="form-control" id="ruolo" name="ruolo" formControlName="ruolo">
+                            <option value="" disabled selected>Scegli un ruolo</option>
+                            <option value="admin">Admin</option>
+                            <option value="utente">Utente</option>
+                        </select>
+                        <p *ngIf="!aggiungiUtenteForm.get('ruolo')?.valid && aggiungiUtenteForm.get('ruolo')?.touched"
+                            class="text-danger">Ruolo non valido</p>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" [disabled]="!aggiungiUtenteForm.valid">Invia</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </form>
             </div>
         </div>
     </div>

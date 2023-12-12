@@ -8,25 +8,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddEmployeeComponent implements OnInit{
 
-  onSubmit(form:any){
-    console.log(form)
-  }
-
   onSubmitReactive(){
     console.log(this.aggiungiUtenteForm.value)
-    this.aggiungiUtenteForm = new FormGroup({
-      nome: new FormControl(''),
-      cognome: new FormControl(''),
-      password: new FormControl(''),
-      email: new FormControl(''),
-      ruolo: new FormControl(''),
+    this.aggiungiUtenteForm.reset()
+    this.showResponseResult = "utente creato correttamente"
 
-      
-    });
   }
   
   aggiungiUtenteForm!: FormGroup;
   
+  showResponseResult: string = ""
   
   ngOnInit(): void {
     this.aggiungiUtenteForm = new FormGroup({
