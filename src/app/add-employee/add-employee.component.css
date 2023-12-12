@@ -1,0 +1,8 @@
+.custom-alert {
+    margin: 0 !important;  /* Rimuovi il margine inferiore */
+      /* Rimuovi il bordo arrotondato se desiderato */
+    font-size: 14px !important;
+    padding: 10px  !important;
+    text-align: center !important;   /* Regola la dimensione del testo se necessario */
+    /* Aggiungi altri stili di dimensione e posizione se necessario */
+  }
