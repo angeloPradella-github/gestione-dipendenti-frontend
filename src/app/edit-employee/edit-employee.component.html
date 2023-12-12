@@ -1,1 +1,44 @@
-<p>edit-employee works!</p>
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editEmployeeForm" (ngSubmit)="onSubmitReactive()">
+
+                    <div class="form-group mb-3">
+                        <label for="editName">Edit name:</label>
+                        <input class="form-control" type="text" id="editName" name="editName"
+                            placeholder="{{datiUtente.nome}}" formControlName="editName">
+                        <p *ngIf="!editEmployeeForm.get('editName')?.valid && editEmployeeForm.get('editName')?.touched"
+                            class="text-danger">Invalid Name</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="editSurname">Edit surname:</label>
+                        <input class="form-control" type="text" id="editSurname" name="editSurname"
+                        placeholder="{{datiUtente.cognome}}" formControlName="editSurname">
+                        <p *ngIf="!editEmployeeForm.get('editSurname')?.valid && editEmployeeForm.get('editSurname')?.touched"
+                            class="text-danger">Invalid Surname</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="editPassword">Edit password:</label>
+                        <input class="form-control" type="password" id="editPassword" name="editPassword"
+                        placeholder="{{datiUtente.password}}" formControlName="editPassword">
+                        <p *ngIf="!editEmployeeForm.get('editPassword')?.valid && editEmployeeForm.get('editPassword')?.touched"
+                            class="text-danger">Invalid Password</p>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" [disabled]="!editEmployeeForm.valid">Invia</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
