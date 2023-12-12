@@ -8,20 +8,21 @@
         clocking in and out.
       </p>
 
-      <!-- Visualizzazione dell'orologio -->
-      <div class="mt-3">
-        <p>Current time: {{ currentTime | date : "mediumTime" }}</p>
+      <div class="mt-3 clock-container">
+        <i class="fa-regular fa-clock"></i>
+        <span class="clock">{{ currentTime | date : "mediumTime" }}</span>
       </div>
-      <!-- Utilizzo di *ngIf per mostrare il pulsante corretto -->
       <button
         *ngIf="isEntered; else enterButton"
-        class="btn btn-danger"
+        class="button-exit button-custom"
         (click)="exit()"
       >
         Exit
       </button>
       <ng-template #enterButton>
-        <button class="btn btn-success" (click)="enter()">Enter</button>
+        <button class="button-custom button-enter" (click)="enter()">
+          Enter
+        </button>
       </ng-template>
     </div>
 
