@@ -1,0 +1,11 @@
+.day-divider td {
+  height: 1px !important;
+  color: dodgerblue;
+  font-weight: 800;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.day-divider span {
+  font-size: 12px;
+}

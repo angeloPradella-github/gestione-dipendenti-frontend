@@ -1,56 +1,57 @@
 <div class="container mt-5">
-    <div class="row">
-      <!-- Colonna sinistra -->
-      <div class="col-md-6">
-        <h1>Welcome, {{datiUtente?.name}}</h1>
-        <p>This page helps track when employees arrive and leave, just like clocking in and out.</p>
+  <div class="row">
+    <!-- Colonna sinistra -->
+    <div class="col-md-6">
+      <h1>Welcome, {{ datiUtente?.name }}</h1>
+      <p>
+        This page helps track when employees arrive and leave, just like
+        clocking in and out.
+      </p>
 
-        <!-- Visualizzazione dell'orologio -->
-        <div class=" mt-3">
-          <p>Current time: {{ currentTime | date: 'mediumTime' }}</p>
-        </div>
-        <!-- Utilizzo di *ngIf per mostrare il pulsante corretto -->
-        <button *ngIf="isEntered; else enterButton" class="btn btn-danger" (click)="exit()">
-          Exit
-        </button>
-        <ng-template #enterButton>
-          <button class="btn btn-success" (click)="enter()">
-            Enter
-          </button>
-        </ng-template>
+      <!-- Visualizzazione dell'orologio -->
+      <div class="mt-3">
+        <p>Current time: {{ currentTime | date : "mediumTime" }}</p>
       </div>
-  
-      <!-- Colonna destra -->
-      <div class="col-md-6">
-        <!-- Card Info -->
-        <div class="card custom-card">
-            <div class="card-body m-3">
-              <h5 class="card-title">User Information</h5>
-              <ul class="mt-5">
-                <li class="list-group-item listData">
-                  <strong>Name:</strong> {{ datiUtente?.name }}
-                </li>
-                <li class="list-group-item listData">
-                  <strong>Surname:</strong> {{ datiUtente?.surname }}
-                </li>
-                <li class="list-group-item listData">
-                  <strong>Email:</strong> {{ datiUtente?.email }}
-                </li>
-                <li class="list-group-item listData">
-                  <strong>Role:</strong> {{ datiUtente?.role }}
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-  
-        <!-- Card Entrate -->
-        <div class="card custom-card">
-          <div class="card-body m-3">
-            <h5 class="card-title">Entra</h5>
-            <p class="card-text">Contenuto della card Entrate...</p>
-          </div>
+      <!-- Utilizzo di *ngIf per mostrare il pulsante corretto -->
+      <button
+        *ngIf="isEntered; else enterButton"
+        class="btn btn-danger"
+        (click)="exit()"
+      >
+        Exit
+      </button>
+      <ng-template #enterButton>
+        <button class="btn btn-success" (click)="enter()">Enter</button>
+      </ng-template>
+    </div>
+
+    <!-- Colonna destra -->
+    <div class="col-md-6">
+      <!-- Card Info -->
+      <div class="card custom-card">
+        <div class="card-body m-3">
+          <h5 class="card-title">User Information</h5>
+          <ul class="mt-5">
+            <li class="list-group-item listData">
+              <strong>Name:</strong> {{ datiUtente?.name }}
+            </li>
+            <li class="list-group-item listData">
+              <strong>Surname:</strong> {{ datiUtente?.surname }}
+            </li>
+            <li class="list-group-item listData">
+              <strong>Email:</strong> {{ datiUtente?.email }}
+            </li>
+            <li class="list-group-item listData">
+              <strong>Role:</strong> {{ datiUtente?.role }}
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+
+    <!-- Card Entrate -->
+
+    <h2 class="card-title mb-3">Here's your activity Log</h2>
+    <app-employee-entry-table></app-employee-entry-table>
   </div>
+</div>

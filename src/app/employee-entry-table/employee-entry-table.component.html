@@ -1,23 +1,45 @@
-<div class="example-container">
-  <mat-table [dataSource]="dataSource">
-    <!-- Column for entry time -->
-    <ng-container matColumnDef="entry_time">
-      <mat-header-cell *matHeaderCellDef> Entry Time </mat-header-cell>
-      <mat-cell *matCellDef="let entry">
-        {{ entry.entry_time | date : "medium" }}
-      </mat-cell>
-    </ng-container>
+<table class="table table-striped table-bordered">
+  <caption>
+    Log Entrate/Uscite Utente
+  </caption>
 
-    <!-- Column for exit time -->
-    <ng-container matColumnDef="exit_time">
-      <mat-header-cell *matHeaderCellDef> Exit Time </mat-header-cell>
-      <mat-cell *matCellDef="let entry">
-        {{ entry.exit_time | date : "medium" }}
-      </mat-cell>
+  <thead class="table-light x">
+    <tr>
+      <th>#</th>
+      <th>Entry Time</th>
+      <th>Exit Time</th>
+      <th>Worked Hours</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let entry of userEntries; let i = index">
+      <ng-container
+        *ngIf="
+          i === 0 ||
+          isDifferentDay(entry.entry_time, userEntries[i - 1].entry_time)
+        "
+      >
+        <tr class="day-divider">
+          <td colspan="3">{{ entry.entry_time | date : "dd/MM/yyyy" }}</td>
+          <td colspan="1">
+            <span class="small">Total: </span
+            >{{ calculateTotalHoursForDay(entry.entry_time) }}
+          </td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td colspan="2">{{ entry.entry_time | date : "shortTime" }}</td>
+        <td>
+          {{
+            entry.exit_time
+              ? (entry.exit_time | date : "shortTime")
+              : "In progress..."
+          }}
+        </td>
+        <td>
+          {{ calculateWorkingHours(entry.entry_time, entry.exit_time) }}
+        </td>
+      </tr>
     </ng-container>
-
-    <!-- Table rows -->
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-  </mat-table>
-</div>
+  </tbody>
+</table>
