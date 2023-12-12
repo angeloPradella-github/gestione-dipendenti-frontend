@@ -39,6 +39,11 @@ const routes: Routes = [
     component: AdminViewsEmployeeLogComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'home-employee/:id',
+    component: HomeEmployeeComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

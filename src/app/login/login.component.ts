@@ -39,10 +39,10 @@ export class LoginComponent {
           localStorage.setItem('utenteLoggato', JSON.stringify(user));
           this.globalVariablesService.updateUtenteLoggato(user);
           this.formReattivo.reset();
-          if (user.isAdmin) {
+          if (user.role=="admin") {
             this.router.navigate(['/admin']);
           } else {
-            this.router.navigate([`/employee-records-view/${user.id}`]);
+            this.router.navigate([`/home-employee/${user.id}`]);
           }
         },
         (error: any) => {
