@@ -1,1 +1,23 @@
-<p>employee-entry-table works!</p>
+<div class="example-container">
+  <mat-table [dataSource]="dataSource">
+    <!-- Column for entry time -->
+    <ng-container matColumnDef="entry_time">
+      <mat-header-cell *matHeaderCellDef> Entry Time </mat-header-cell>
+      <mat-cell *matCellDef="let entry">
+        {{ entry.entry_time | date : "medium" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Column for exit time -->
+    <ng-container matColumnDef="exit_time">
+      <mat-header-cell *matHeaderCellDef> Exit Time </mat-header-cell>
+      <mat-cell *matCellDef="let entry">
+        {{ entry.exit_time | date : "medium" }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Table rows -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
