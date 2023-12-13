@@ -1,30 +1,49 @@
 <div class="container mt-5">
-  <!-- Intestazione della Pagina -->
   <div class="row mb-4">
     <div class="col">
-      <h1>Employee Dashboard</h1>
-      <p class="text-muted">Detailed view of employee logs and information</p>
+      <h1 class="display-4">Employee Dashboard</h1>
+      <p class="lead">
+        Here you can find a <strong>detailed view</strong> of employee logs and
+        personal information.
+      </p>
     </div>
   </div>
 
   <div class="row mb-4">
     <div class="col-md-4">
-      <h3>User Details</h3>
-      <ul class="list-group">
-        <li class="list-group-item">Name: {{ userDetails?.name }}</li>
-        <li class="list-group-item">Email: {{ userDetails?.email }}</li>
-        <li class="list-group-item">Role: {{ userDetails?.role }}</li>
-      </ul>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Employee Details</h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Name:</strong> {{ userDetails?.name }}
+            </li>
+            <li class="list-group-item">
+              <strong>Email:</strong> {{ userDetails?.email }}
+            </li>
+            <li class="list-group-item">
+              <strong>Role:</strong> {{ userDetails?.role }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-8"></div>
+    <div class="col-md-8">
+      <!-- Aggiungi qui grafici, statistiche o altre informazioni -->
+    </div>
   </div>
 
-  <!-- Sezione dei Log dei Dipendenti -->
   <div class="row">
     <div class="col">
-      <h3>Employee Log Entries</h3>
-      <app-employee-entry-table></app-employee-entry-table>
+      <div class="card">
+        <div class="card-header">
+          <h3>Employee Log Entries</h3>
+        </div>
+        <div class="card-body">
+          <app-employee-entry-table></app-employee-entry-table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
