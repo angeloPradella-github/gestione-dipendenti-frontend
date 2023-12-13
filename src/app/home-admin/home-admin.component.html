@@ -1,5 +1,9 @@
-<app-all-employees-table></app-all-employees-table>
+<!-- Nel template del componente genitore -->
+<app-all-employees-table #employeesTable></app-all-employees-table>
+<app-add-employee
+  (employeeAdded)="employeesTable.fetchEmployees()"
+></app-add-employee>
 
-<app-add-employee></app-add-employee>
-
-<app-edit-employee></app-edit-employee>
+<app-edit-employee
+  (employeeModified)="employeesTable.fetchEmployees()"
+></app-edit-employee>

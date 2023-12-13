@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditEmployeeService } from '../edit-employee.service';
 
@@ -8,7 +8,14 @@ import { EditEmployeeService } from '../edit-employee.service';
   styleUrls: ['./edit-employee.component.css'],
 })
 export class EditEmployeeComponent implements OnInit {
-  // Iniezione del servizio API nel costruttore del componente
+  editEmployeeForm = new FormGroup({
+    editName: new FormControl(''),
+    editSurname: new FormControl(''),
+    editPassword: new FormControl(''),
+  });
+
+  @Output() employeeModified = new EventEmitter<void>();
+
   constructor(private EditEmployeeService: EditEmployeeService) {}
 
   editName1 = '';
@@ -36,14 +43,7 @@ export class EditEmployeeComponent implements OnInit {
         console.error(`Si è verificato un errore:`, error);
       }
     );
-
-    // Esegui qui la chiamata HTTP per aggiornare l'utente con i nuovi valori
-
-    // Aggiorna anche il servizio locale con il nuovo utente
-    // this.EditEmployeeService.employee = updatedEmployee;
   }
-
-  editEmployeeForm!: FormGroup;
 
   datiUtente: any;
 
@@ -54,22 +54,12 @@ export class EditEmployeeComponent implements OnInit {
 
     this.EditEmployeeService.employee$.subscribe((employee) => {
       if (employee) {
-        console.log(employee.name);
-        // this.editName1 = employee.name;
-        this.editEmployeeForm = new FormGroup({
-          editName: new FormControl(employee.name),
-          editSurname: new FormControl(employee.surname),
-          editPassword: new FormControl(employee.password),
+        this.editEmployeeForm.setValue({
+          editName: employee.name || '',
+          editSurname: employee.surname || '',
+          editPassword: employee.password || '',
         });
       }
     });
-
-    const userData = localStorage.getItem('utenteLoggato');
-    if (userData) {
-      // Converte la stringa JSON in un oggetto JavaScript
-      this.datiUtente = JSON.parse(userData);
-    } else {
-      console.log('Nessun dato utente trovato nella Local Storage');
-    }
   }
 }
