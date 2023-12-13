@@ -19,9 +19,11 @@ export class TimeEmployeeService {
     return this.http.post(`${this.baseUrl}/logs/new/${userId}`, entryTimeData);
   }
 
-  saveExitTime(logId: number, exitTimeData: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/log/update/${logId}`, exitTimeData);
+  saveExitTime(idLogProva: number, exitTimeData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/log/update/${idLogProva}`, exitTimeData);
   }
   
-  
+  getLastLog(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/lastlog/user/${userId}`);
+  }
 }

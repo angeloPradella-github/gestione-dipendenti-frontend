@@ -12,19 +12,23 @@
         <i class="fa-regular fa-clock"></i>
         <span class="clock">{{ currentTime | date : "mediumTime" }}</span>
       </div>
-      <button
-        *ngIf="isEntered; else enterButton"
-        class="button-exit button-custom"
-        (click)="exit()"
-      >
-        Exit
-      </button>
-      <ng-template #enterButton>
-        <button class="button-custom button-enter" (click)="enter()">
-          Enter
-        </button>
+      <!-- <div *ngIf="exitLog == null; else exitButton">
+        <button (click)="exit()">Exit</button>
+      </div>
+      
+      <ng-template #exitButton>
+        <button (click)="enter()">Entry</button>
       </ng-template>
+    </div> -->
+    <div *ngIf="exitLog && exitLog.exitTime === null; else entryButton">
+      <button class=" button-custom button-exit" (click)="exit()">Exit</button>
     </div>
+    
+    <ng-template #entryButton>
+      <button class=" button-custom button-enter"(click)="enter()">Entry</button>
+    </ng-template>
+</div>
+    
 
     <!-- Colonna destra -->
     <div class="col-md-6">
