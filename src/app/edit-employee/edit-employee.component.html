@@ -22,23 +22,6 @@
         </div>
         <form [formGroup]="editEmployeeForm" (ngSubmit)="onSubmitReactive()">
           <!--   ////////////////////////////////////////////////////////////////////////////////// -->
-          <div class="form-group mb-3" hidden>
-            <label for="editName">Edit Name:</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="editName"
-            />
-            <p
-              *ngIf="
-                !editEmployeeForm.get('editName')?.valid &&
-                editEmployeeForm.get('editName')?.touched
-              "
-              class="text-danger"
-            >
-              Invalid Surname
-            </p>
-          </div>
           <!--   ////////////////////////////////////////////////////////////////////////////////// -->
 
           <div class="form-group mb-3">
@@ -46,18 +29,19 @@
             <input
               class="form-control"
               type="text"
-              id="editName"
-              name="editName"
               formControlName="editName"
             />
             <p
-              *ngIf="
-                !editEmployeeForm.get('editName')?.valid &&
-                editEmployeeForm.get('editName')?.touched
-              "
+              *ngIf="editEmployeeForm?.get('editName')?.errors?.['required'] && editEmployeeForm?.get('editName')?.touched"
               class="text-danger"
             >
-              Invalid Surname
+              Name is required.
+            </p>
+            <p
+              *ngIf="editEmployeeForm?.get('editName')?.errors?.['pattern'] && editEmployeeForm?.get('editName')?.touched"
+              class="text-danger"
+            >
+              Name cannot be empty or blank spaces.
             </p>
           </div>
 
@@ -66,38 +50,38 @@
             <input
               class="form-control"
               type="text"
-              id="editSurname"
-              name="editSurname"
               formControlName="editSurname"
             />
             <p
-              *ngIf="
-                !editEmployeeForm.get('editSurname')?.valid &&
-                editEmployeeForm.get('editSurname')?.touched
-              "
+              *ngIf="editEmployeeForm?.get('editSurname')?.errors?.['required'] && editEmployeeForm?.get('editSurname')?.touched"
               class="text-danger"
             >
-              Invalid Surname
+              Surname is required.
+            </p>
+            <p
+              *ngIf="editEmployeeForm?.get('editSurname')?.errors?.['pattern'] && editEmployeeForm?.get('editSurname')?.touched"
+              class="text-danger"
+            >
+              Surname cannot be empty or blank spaces.
             </p>
           </div>
 
           <div class="form-group mb-3">
-            <label for="editPassword">New password:</label>
+            <label for="editPassword"
+              >New password (Leave blank to keep the same one):</label
+            >
             <input
               class="form-control"
               type="password"
-              id="editPassword"
-              name="editPassword"
               formControlName="editPassword"
             />
             <p
-              *ngIf="
-                !editEmployeeForm.get('editPassword')?.valid &&
-                editEmployeeForm.get('editPassword')?.touched
-              "
+              *ngIf="editEmployeeForm?.get('editPassword')?.errors?.['minlength'] && editEmployeeForm?.get('editPassword')?.touched"
               class="text-danger"
             >
-              Invalid Password
+              Password must be at least
+              {{ editEmployeeForm?.get('editPassword')?.errors?.['minlength']?.requiredLength }}
+              characters long.
             </p>
           </div>
 

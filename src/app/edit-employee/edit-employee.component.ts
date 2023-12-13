@@ -8,17 +8,25 @@ import { EditEmployeeService } from '../edit-employee.service';
   styleUrls: ['./edit-employee.component.css'],
 })
 export class EditEmployeeComponent implements OnInit {
-  editEmployeeForm = new FormGroup({
-    editName: new FormControl(''),
-    editSurname: new FormControl(''),
-    editPassword: new FormControl(''),
-  });
+  editEmployeeForm!: FormGroup; // Definizione del tipo
 
   @Output() employeeModified = new EventEmitter<void>();
   showResultMessage = false;
   resultMessage = '';
 
-  constructor(private EditEmployeeService: EditEmployeeService) {}
+  constructor(private EditEmployeeService: EditEmployeeService) {
+    this.editEmployeeForm = new FormGroup({
+      editName: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/\S/),
+      ]),
+      editSurname: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/\S/),
+      ]),
+      editPassword: new FormControl('', [Validators.minLength(5)]), //se null o vuota lo lascia passare
+    });
+  }
 
   editName1 = '';
   onSubmit(form: any) {
