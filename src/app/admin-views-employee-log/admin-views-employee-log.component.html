@@ -1,31 +1,30 @@
 <div class="container mt-5">
-    <h2>Page of {{datiUtente?.name}}</h2>
-    <div class="col-md-6">
-        <!-- Card Info -->
-        <div class="card custom-card">
-          <div class="card-body m-3">
-            <h5 class="card-title">User Information</h5>
-            <ul class="mt-5">
-                <li class="list-group-item listData">
-                    <strong>Id:</strong> {{ datiUtente?.id }}
-                  </li>
-              <li class="list-group-item listData">
-                <strong>Name:</strong> {{ datiUtente?.name }}
-              </li>
-              <li class="list-group-item listData">
-                <strong>Surname:</strong> {{ datiUtente?.surname }}
-              </li>
-              <li class="list-group-item listData">
-                <strong>Email:</strong> {{ datiUtente?.email }}
-              </li>
-              <li class="list-group-item listData">
-                <strong>Role:</strong> {{ datiUtente?.role }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+  <!-- Intestazione della Pagina -->
+  <div class="row mb-4">
+    <div class="col">
+      <h2>Employee Dashboard</h2>
+      <p class="text-muted">Detailed view of employee logs and information</p>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <h3>User Details</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Name: {{ userDetails?.name }}</li>
+        <li class="list-group-item">Email: {{ userDetails?.email }}</li>
+        <li class="list-group-item">Role: {{ userDetails?.role }}</li>
+      </ul>
+    </div>
+
+    <div class="col-md-8"></div>
+  </div>
+
+  <!-- Sezione dei Log dei Dipendenti -->
+  <div class="row">
+    <div class="col">
+      <h3>Employee Log Entries</h3>
+      <app-employee-entry-table></app-employee-entry-table>
+    </div>
+  </div>
 </div>
-
-
-
