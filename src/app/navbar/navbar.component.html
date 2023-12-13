@@ -3,19 +3,22 @@
   <input type="checkbox" id="nav_check" hidden />
   <nav>
     <ul>
-      <li>
-        <a href="" class="active">Home</a>
-      </li>
+      <ng-container *ngIf="isLogged && utenteLoggato?.role === 'admin'">
+        <li>
+          <a [routerLink]="['/admin']">Admin Home</a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="isLogged && utenteLoggato?.role === 'employee'">
+        <li>
+          <a [routerLink]="['/home-employee', utenteLoggato?.id]">Employee Home</a>
+        </li>
+      </ng-container>
       <li class="logout-container">
-        <a *ngIf="!isLogged" [routerLink]="['/login']" class="login-button"
-          >Login</a
-        >
-        <a class="show-name" *ngIf="isLogged" (click)="showLogout = !showLogout"
-          >Ciao, <b>{{ utenteLoggato?.name }}</b>
+        <a class="show-name" *ngIf="isLogged" (click)="showLogout = !showLogout">
+          Ciao, <b>{{ utenteLoggato?.name }}</b>
         </a>
-        <a *ngIf="showLogout" class="logout-button" (click)="logout()"
-          >Logout</a
-        >
+        <a *ngIf="showLogout" class="logout-button" (click)="logout()">Logout</a>
+        <a *ngIf="!isLogged" [routerLink]="['/login']" class="login-button">Login</a>
       </li>
     </ul>
   </nav>
@@ -23,5 +26,5 @@
     <div></div>
     <div></div>
     <div></div>
-  </label>
+  </label>  
 </header>
