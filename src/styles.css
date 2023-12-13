@@ -35,6 +35,11 @@ svg {
   max-width: 100%;
 }
 
-p{
+p {
   text-shadow: 5px;
+}
+
+h1 {
+  font-size: 50px;
+  text-decoration: underline;
 }
