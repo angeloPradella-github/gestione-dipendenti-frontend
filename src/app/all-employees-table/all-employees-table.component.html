@@ -1,58 +1,72 @@
-<!-- <p>home-admin works!</p> -->
 <div class="container mt-5">
-  <div class="mt-2 mb-2">
-    <h1>Welcome to home admin</h1>
+  <div class="mb-4">
+    <h1>Welcome to the Admin Dashboard</h1>
+    <p class="clearfix custom-width">
+      This <strong>dashboard</strong> allows you to manage employee records
+      efficiently. Here you can <strong>add</strong>, <strong>edit</strong>, or
+      <strong>delete</strong> employee details, as well as view their individual
+      logs.
+    </p>
   </div>
-  <p>
-    List of all employees:
-  </p>
-  <table class="table table-hover rounded mt-2">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First name</th>
-        <th scope="col">Last name</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of employees">
-        <th scope="row">{{ employee.id }}</th>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.surname }}</td>
-        <td>
-          <a [routerLink]="['/admin-views-employee-log/', employee.id]">
-            <button type="button" class="btn btn-primary me-1">
-              <i class="fa-solid fa-eye"></i> Show
-            </button>
-          </a>
 
-          <button
-            type="button"
-            class="btn btn-warning me-1"
-            (click)="getUserSingle(employee.id)"
-            data-bs-toggle="modal"
-            data-bs-target="#edit"
-          >
-            <i class="fa-solid fa-pen-to-square"></i> Edit
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger ml-5"
-            (click)="deleteEmployee(employee.id)"
-          >
-            <i class="fa-solid fa-trash"></i> Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button
-    type="button"
-    class="btn btn-primary mb-4"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-  >
-    Add employee
-  </button>
+  <div class="mb-3 text-end">
+    <button
+      type="button"
+      class="btn btn-success"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      <i class="fa-solid fa-plus"></i> Add Employee
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="d-inline-block">List of All Employees</h3>
+      <span class="badge bg-primary ms-2">{{ employees.length }}</span>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover rounded">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <th scope="row">{{ employee.id }}</th>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.surname }}</td>
+            <td>
+              <a
+                [routerLink]="['/admin-views-employee-log/', employee.id]"
+                class="btn btn-primary me-1"
+              >
+                <i class="fa-solid fa-eye"></i> Show
+              </a>
+              <button
+                type="button"
+                class="btn btn-warning me-1"
+                (click)="getUserSingle(employee.id)"
+                data-bs-toggle="modal"
+                data-bs-target="#edit"
+              >
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteEmployee(employee.id)"
+              >
+                <i class="fa-solid fa-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

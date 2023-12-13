@@ -1,0 +1,12 @@
+.clearfix {
+  font-size: 20px;
+}
+.custom-width {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .custom-width {
+    width: 50%;
+  }
+}
