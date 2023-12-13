@@ -10,7 +10,6 @@
       </ng-container>
       <ng-container *ngIf="isLogged && utenteLoggato?.role === 'employee'">
         <li>
-          <!-- Aggiungi l'ID dell'utente come parametro nella route -->
           <a [routerLink]="['/home-employee', utenteLoggato?.id]">Employee Home</a>
         </li>
       </ng-container>
