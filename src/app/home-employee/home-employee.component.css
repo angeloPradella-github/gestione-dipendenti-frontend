@@ -12,6 +12,10 @@ body {
   padding: 20px;
 }
 
+.text-2 {
+  font-size: 20px;
+}
+
 .custom-card {
   height: 300px; /* Altezza desiderata per le card */
   margin-bottom: 20px;
