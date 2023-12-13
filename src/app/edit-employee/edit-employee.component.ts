@@ -15,6 +15,8 @@ export class EditEmployeeComponent implements OnInit {
   });
 
   @Output() employeeModified = new EventEmitter<void>();
+  showResultMessage = false;
+  resultMessage = '';
 
   constructor(private EditEmployeeService: EditEmployeeService) {}
 
@@ -31,16 +33,23 @@ export class EditEmployeeComponent implements OnInit {
       id: this.EditEmployeeService.id,
     };
 
-    // Chiamata per l'aggiornamento dell'utente nel servizio
-    // this.EditEmployeeService.fetchEmployeeById(
-    //   this.EditEmployeeService.employee.name.id
-    // );
     this.EditEmployeeService.updateEmployeeData(updatedEmployee).subscribe(
       (user: any) => {
-        console.log(user);
+        console.log('Modifica andata a buon fine, nuovi dati: ', user);
+        this.employeeModified.emit();
+        this.resultMessage = 'User modified successfully';
+        this.showResultMessage = true;
+        setInterval(() => {
+          this.showResultMessage = false;
+        }, 2500);
       },
       (error) => {
         console.error(`Si è verificato un errore:`, error);
+        this.resultMessage = 'Error during update ';
+        this.showResultMessage = true;
+        setInterval(() => {
+          this.showResultMessage = false;
+        }, 2500);
       }
     );
   }
@@ -57,7 +66,7 @@ export class EditEmployeeComponent implements OnInit {
         this.editEmployeeForm.setValue({
           editName: employee.name || '',
           editSurname: employee.surname || '',
-          editPassword: employee.password || '',
+          editPassword: '',
         });
       }
     });

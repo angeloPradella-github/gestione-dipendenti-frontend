@@ -60,6 +60,7 @@ body {
   color: white;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
+  margin-bottom: 20px;
 }
 
 .button-custom:hover {

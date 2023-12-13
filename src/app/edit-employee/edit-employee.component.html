@@ -17,6 +17,9 @@
         ></button>
       </div>
       <div class="modal-body">
+        <div *ngIf="showResultMessage" class="alert alert-success">
+          {{ resultMessage }}
+        </div>
         <form [formGroup]="editEmployeeForm" (ngSubmit)="onSubmitReactive()">
           <!--   ////////////////////////////////////////////////////////////////////////////////// -->
           <div class="form-group mb-3" hidden>
@@ -37,8 +40,6 @@
             </p>
           </div>
           <!--   ////////////////////////////////////////////////////////////////////////////////// -->
-
-          <div>{{ utenteId }}a</div>
 
           <div class="form-group mb-3">
             <label for="editName">Edit Name:</label>
@@ -81,7 +82,7 @@
           </div>
 
           <div class="form-group mb-3">
-            <label for="editPassword">Edit password:</label>
+            <label for="editPassword">New password:</label>
             <input
               class="form-control"
               type="password"
